@@ -25,7 +25,7 @@ int main(void)
 
 	t1 = (log(y/x)- a*a*x*x/(2*y*y))/(b*b*b);
 
-	tg_ax_2 = tan(a*x/2);
+	tg_ax_2 = tan(((a*x/2)*3.14/180)); //tg_ax_2 = tan(a*x/2);
 	a_1 = 1 / a;
 	t2 = a_1*tg_ax_2 + a_1*log(tg_ax_2);
 
