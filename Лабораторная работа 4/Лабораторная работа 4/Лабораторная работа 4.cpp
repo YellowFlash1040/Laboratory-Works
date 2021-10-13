@@ -22,7 +22,7 @@ int main()
 
 	UserProfileElementInAComputingSystem = ((unsigned int)g & 0xFF) << 8;
 	UserProfileElementInAComputingSystem |= ((unsigned int)s & 0xF) << 4;
-	UserProfileElementInAComputingSystem |= ((unsigned int)p & 1) << 3;
+	UserProfileElementInAComputingSystem |= ((unsigned int)p & 0x1) << 3;
 
 	printf("\nЭлемент профиля пользователя в вычислительной системе = %0x\n", UserProfileElementInAComputingSystem);
 
