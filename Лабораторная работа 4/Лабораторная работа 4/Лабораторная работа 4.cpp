@@ -24,7 +24,7 @@ int main()
 	UserProfileElementInAComputingSystem |= ((unsigned int)s & 0xF) << 4;
 	UserProfileElementInAComputingSystem |= ((unsigned int)p & 1) << 3;
 
-	printf("\nЭлемент профиля пользователя в вычислительной системе = %04x\n", UserProfileElementInAComputingSystem);
+	printf("\nЭлемент профиля пользователя в вычислительной системе = %0x\n", UserProfileElementInAComputingSystem);
 
 	return 0;
 }
