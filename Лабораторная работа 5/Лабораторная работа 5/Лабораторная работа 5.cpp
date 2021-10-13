@@ -17,9 +17,9 @@ int main(void)
     do
     {
         printf("Введите координату x > ");
-        scanf("%lf", &x);
+        int first_scan = scanf("%lf", &x);
         printf("Введите координату y > ");
-        scanf("%lf", &y);
+        int second_can = scanf("%lf", &y);
 
         printf("x=%6.3lf;  y=%6.3lf\n\n", x, y);
 
