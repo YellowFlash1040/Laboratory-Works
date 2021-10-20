@@ -24,9 +24,11 @@ int main()
     int first_scan;
     int sum = 0;
 
+    int number = 6;
+
     do
     {
-        for (int i = 1; i < 11; i++)
+        for (int i = 1; i < number; i++)
         {
             first_number = rand() % 10 + 1;
             second_number = rand() % 10 + 1;
@@ -41,7 +43,7 @@ int main()
         }
 
         printf("\n");
-        printf("Ваш результат %d/12", (int)round(sum * 12 / 10.0));
+        printf("Ваш результат %d/12", (int)round(sum * 12 / (double)(number - 1)));
         sum = 0;
 
         printf("\n\n");
