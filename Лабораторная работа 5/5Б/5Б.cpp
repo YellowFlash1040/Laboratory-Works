@@ -12,8 +12,8 @@ int main()
 
     int k;
     char answer = 'y';
-
-    do
+    
+    do 
     {
         printf("Введите число k > ");
         int first_scan = scanf("%d", &k);
