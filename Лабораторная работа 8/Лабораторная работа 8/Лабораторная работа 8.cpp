@@ -7,14 +7,19 @@ using namespace std;
 
 int main(void)
 {
+    //Даем возможность консоли выводить и принимать русский текст правильно
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
 
+    //Объявляем наш массив
     int Array[200];
+    //Создаем переменную которая будет хранить его длину
     int Array_Length = 200;
 
+    //Создаем настоящий генератор случайных чисел, задавая его свойство srand текущем количеством секунд в системных часах
     srand(time(0));
 
+    //Заполняем наш массив случайными числами в диапазоне от 0 до 100
     for (int i = 0; i < Array_Length; i++)
     {
         Array[i] = rand() % 101;
@@ -67,8 +72,9 @@ int main(void)
         }
     }
 
-    int thirdByHeightValue = numbers[2];
+    int thirdByHeightValue = numbers[2]; // Переменная хранящая значение третьего по величине елемента массива
 
+    // Выводим на екран наш массив (начальный)
     printf("Начальный массив:\n");
     for (int i = 0; i < Array_Length; i++)
     {
@@ -76,7 +82,7 @@ int main(void)
     }
     printf("\n\n");
 
-
+    // Меняем значения всех элементов массива, которые превышают thirdByHeightValue, на thirdByHeightValue
     for (int i = 0; i < 200; i++)
     {
         if (Array[i] > thirdByHeightValue)
@@ -85,6 +91,7 @@ int main(void)
         }
     }
 
+    //Выводим видоизмененный массив
     printf("Массив-результат:\n");
     for (int i = 0; i < Array_Length; i++)
     {
