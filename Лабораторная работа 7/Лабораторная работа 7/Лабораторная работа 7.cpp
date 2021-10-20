@@ -9,10 +9,11 @@ int main(void)
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
 
-    short n;
+    // Переменные в формулах круга и прямой
     double x, y;
+    //Переменная отвечающая за отступ(количество пробелов) перед звездочкой(точкой графика)
     short h;
-    for (n = 0; n < 4; n++)
+    for (int n = 0; n < 4; n++)
     {
 
         printf("|   x   |      y     |\n");
