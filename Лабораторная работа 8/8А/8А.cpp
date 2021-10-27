@@ -18,6 +18,10 @@ int main()
 
     Status places[10];
 
+    for (int i = 0; i < 10; i++)
+    {
+        places[i] = Свободно;
+    }
     //Second Variant
     char answer[4];
 
@@ -71,7 +75,7 @@ int main()
         {*/
             if (countOfFreePlacesInSecondPart != 5)
             {
-                places[countOfFreePlacesInSecondPart] = Забронировано;
+                places[countOfFreePlacesInSecondPart + 5] = Забронировано;
                 countOfFreePlacesInSecondPart++;
                 printf("Вы забронировали %d место. Приятного полета.\n\n", countOfFreePlacesInSecondPart + 5);
 
