@@ -11,11 +11,11 @@ int main()
 	int lengthOfArray;
 	std::cout << "Введите размер массива > ";
 	std::cin >> lengthOfArray;
-	int* Array = new int[lengthOfArray];
+	int Array[10000];
 	printf("\n");
 	for (int i = 0; i < lengthOfArray; i++)
 	{
-		Array[i] = 0;
+		Array[i] = i + 1;
 	}
 
 	char answer[2];
@@ -30,76 +30,61 @@ int main()
 
 		if (strcmp(answer, "i") == 0)
 		{
-			int lengthOfInput;
-			std::string usersInput;
-			int countOfElements;
+			int num = 0;
+			printf("\nВведите елемент который вы хотите добавить > ");
+			int first_scan = scanf("%d", &num);
+
+			int Length = 0;
 			do
 			{
-				printf("\nПожалуйста, введите елементы через \"/\" > ");
-				std::cin >> usersInput;
-				lengthOfInput = usersInput.size();
-				countOfElements = 0;
-				for (int i = 0; i < lengthOfInput; i++)
+				printf("\nВведите количество елементов которое вы хотите добавить > ");
+				int first_scan = scanf("%d", &Length);
+				if (Length > 10000 - lengthOfArray)
 				{
-					if (usersInput[i] == '/')
-					{
-						countOfElements++;
-					}
+					printf("\nИзвините нельзя добавить %d елементов. Максимальное количество елементов которое можно добавить : %d\n", Length, 10000 - lengthOfArray);
 				}
-				countOfElements++;
-				if (countOfElements > lengthOfArray)
-				{
-					printf("\nКоличество елементов не может превышать размер массива (%d). Пожалуйста, повторите ввод :\n", lengthOfArray);
-				}
-			} while (countOfElements > lengthOfArray);
-			int* usersArray = new int[countOfElements];
+			} while (Length > 10000 - lengthOfArray);
 
-			int indexOfElement = 0;
-			int indexOfChar = 0;
-			std::string word;
-			for (int i = 0; i < lengthOfInput; i++)
-			{
-				if (usersInput[i] == '/')
-				{
-					word = usersInput.substr(indexOfChar, i - indexOfChar);
-					usersArray[indexOfElement] = atoi(word.c_str());
-					indexOfChar = i + 1;
-					indexOfElement++;
-				}
-			}
-			word = usersInput.substr(indexOfChar, lengthOfInput - indexOfChar);
-			usersArray[indexOfElement] = atoi(word.c_str());
-
-
-			/*for (int i = 0; i < countOfElements; i++)
-			{
-				printf("%d\n", usersArray[i]);
-			}*/
-			int i = 0;
-			int maxIndex = lengthOfArray - countOfElements + 1;
+			int numberOfStart = 0;
 			do
 			{
-				printf("\nПожалуйста введите номер \"начальной ячейки\" > ");
-				int first_scan = scanf("%d", &i);
-				if (i > maxIndex)
+				printf("Введите номер \"начальной ячейки\" > ");
+				int first_scan = scanf("%d", &numberOfStart);
+				if (numberOfStart > 10000 - Length)
 				{
-					printf("\nНомер начальной ячейки не может быть больше %d. Пожалуйста, повторите ввод :\n", maxIndex);
+					printf("\nИзвините, нельзя вставить %d елементов с %d позиции. Максимально возможная позиция : %d\n", Length, numberOfStart, 10000 - Length);
 				}
-				else if (i < 1)
-				{
-					printf("\nНомер начальной ячейки не может быть меньше 1. Пожалуйста, повторите ввод :\n");
-				}
-			} while (i > maxIndex || i < 1);
-			int j;
-			for (j = 0, i -= 1; j < countOfElements; i++, j++)
+			} while (numberOfStart > 10000 - Length);
+
+			int copyOfArray[10000];
+			for (int i = 0; i < 10000; i++)
 			{
-				Array[i] = usersArray[j];
+				copyOfArray[i] = Array[i];
 			}
+
+			lengthOfArray += Length;
+
+			numberOfStart--;
+			int numberOfEnd = numberOfStart + Length;
+			int indexOfCopy = 0;
+			for (int i = 0; i < 10000; i++)
+			{
+				if (i >= numberOfStart && i < numberOfEnd)
+				{
+					Array[i] = num;
+				}
+				else
+				{
+					Array[i] = copyOfArray[indexOfCopy];
+					indexOfCopy++;
+				}
+			}
+
 
 			printf("\nРезультат : \n");
 			for (int index = 0; index < lengthOfArray; index++)
 			{
-				printf("%d\n", Array[index]);
+				printf("#%d. %d\n", index + 1, Array[index]);
 			}
 
 			printf("\n");
@@ -107,50 +92,71 @@ int main()
 		else if (strcmp(answer, "d") == 0)
 		{
 			int numberOfStart = 0;
-			int numberOfElements = 0;
+			int Length = 0;
 			do
 			{
 				printf("\nВведите количество елементов, которое вы хотите удалить > ");
-				std::cin >> numberOfElements;
-				numberOfElements--;
-				if (numberOfElements > lengthOfArray)
+				std::cin >> Length;
+				if (Length > lengthOfArray)
 				{
 					printf("\nКоличество елементов для удаления не может превышать размер массива(%d).\n", lengthOfArray);
 					printf("Пожалуйста, повторите ввод :\n");
 				}
-				else if (numberOfElements < 1)
+				else if (Length < 1)
 				{
 					printf("\nКоличество елементов для удаления не может быть меньше 1\n");
 					printf("Пожалуйста, повторите ввод :\n");
 				}
-			} while (numberOfElements > lengthOfArray || numberOfElements < 1);
+			} while (Length > lengthOfArray || Length < 1);
 			do
 			{
 				printf("\nВведите номер \"начальной ячейки\" > ");
 				std::cin >> numberOfStart;
 				numberOfStart--;
-				if (numberOfStart > lengthOfArray - numberOfElements)
+				if (numberOfStart > lengthOfArray - Length)
 				{
-					printf("\nНомер начальной ячейки не может превышать %d.\n", lengthOfArray - numberOfElements);
+					printf("\nНомер начальной ячейки не может превышать %d.\n", lengthOfArray - Length);
 					printf("Пожалуйста повторите ввод :\n");
 				}
-				else if (numberOfStart < 1)
+				else if (numberOfStart < 0)
 				{
 					printf("\nНомер начальной ячейки не может быть меньше 1.\n");
 					printf("Пожалуйста повторите ввод :\n");
 				}
-			} while (numberOfStart > lengthOfArray - numberOfElements || numberOfStart < 1);
+			} while (numberOfStart > lengthOfArray - Length || numberOfStart < 0);
 
-			int length = numberOfStart + numberOfElements;
-			for ( ; numberOfStart <= length; numberOfStart++)
+			int copyOfArray[10000];
+			for (int i = 0; i < lengthOfArray; i++)
 			{
-				Array[numberOfStart] = 0;
+				copyOfArray[i] = Array[i];
+			}
+
+			lengthOfArray -= Length;
+			
+			int numberOfEnd = Length + numberOfStart;
+
+			int indexOf = 0;
+			for (int i = 0; i < lengthOfArray + Length; i++)
+			{
+				if (i == 10)
+				{
+					int a = 8;
+				}
+				if (i >= numberOfStart && i < numberOfEnd)
+				{
+					continue;
+				}
+				else
+				{
+					Array[indexOf] = copyOfArray[i];
+					indexOf++;
+				}
 			}
 
 			printf("\nРезультат : \n");
 			for (int index = 0; index < lengthOfArray; index++)
 			{
-				printf("%d\n", Array[index]);
+				printf("#%d. %d\n", index + 1, Array[index]);
 			}
 
 			printf("\n");

@@ -50,7 +50,8 @@ int main()
 
         int sum = 0;
         int ten = 1;
-        int* arrayOfNumbers = new int[stepen];
+        //int* arrayOfNumbers = new int[stepen];
+        int arrayOfNumbers[100];
         for (int i = 1; i <= stepen; i++)
         {
             ten = pow(10, i);
@@ -58,12 +59,16 @@ int main()
             sum += num;
             arrayOfNumbers[i - 1] = num;
         }
-        printf("Сумма цифр введенного числа равна %d\n", sum);
+        int abs = fabs(sum);
+        printf("Сумма цифр введенного числа равна %d\n", abs);
         printf("Введенное вами число наоборот это : ");
+        int n = 0;
         for (int i = 0; i < stepen; i++)
         {
-            printf("%d", arrayOfNumbers[i]);
+            n += arrayOfNumbers[i] * pow(10, stepen - 1 - i);
         }
+
+        printf("%d", n);
         printf("\n");
 
 
