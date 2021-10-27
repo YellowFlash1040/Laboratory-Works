@@ -115,7 +115,7 @@ int main()
 				numberOfStart--;
 				if (numberOfStart > lengthOfArray)
 				{
-					printf("\nНомер начальной ячейки не может превышать размер массива (%d).\n", lengthOfArray - Length);
+					printf("\nНомер начальной ячейки не может превышать размер массива (%d).\n", lengthOfArray);
 					printf("Пожалуйста повторите ввод :\n");
 				}
 				else if (numberOfStart < 0)
