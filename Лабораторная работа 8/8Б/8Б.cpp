@@ -113,9 +113,9 @@ int main()
 				printf("\nВведите номер \"начальной ячейки\" > ");
 				std::cin >> numberOfStart;
 				numberOfStart--;
-				if (numberOfStart > lengthOfArray - Length)
+				if (numberOfStart > lengthOfArray)
 				{
-					printf("\nНомер начальной ячейки не может превышать %d.\n", lengthOfArray - Length);
+					printf("\nНомер начальной ячейки не может превышать размер массива (%d).\n", lengthOfArray - Length);
 					printf("Пожалуйста повторите ввод :\n");
 				}
 				else if (numberOfStart < 0)
@@ -123,7 +123,7 @@ int main()
 					printf("\nНомер начальной ячейки не может быть меньше 1.\n");
 					printf("Пожалуйста повторите ввод :\n");
 				}
-			} while (numberOfStart > lengthOfArray - Length || numberOfStart < 0);
+			} while (numberOfStart > lengthOfArray || numberOfStart < 0);
 
 			int copyOfArray[10000];
 			for (int i = 0; i < lengthOfArray; i++)
