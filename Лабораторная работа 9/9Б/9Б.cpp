@@ -17,12 +17,12 @@ int main()
 
 	do
 	{
-		cout << "Введите количество строк первой матрицы> ";
+		cout << "Введите количество строк первой матрицы > ";
 		cin >> countOfStringsInFirstMatrix;
 		cout << "Введите количество колонок первой матрицы > ";
 		cin >> countOfColumnsInFirstMatrix;
 
-		cout << "Введите количество строк второй матрицы> ";
+		cout << "Введите количество строк второй матрицы > ";
 		cin >> countOfStringsInSecondMatrix;
 		cout << "Введите количество колонок второй матрицы > ";
 		cin >> countOfColumnsInSecondMatrix;
