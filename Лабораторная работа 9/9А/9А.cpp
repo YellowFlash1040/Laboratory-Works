@@ -9,17 +9,20 @@ int main()
 	srand(time(0));
 
 	int Matrix[9][9];
+	int CopyOfMatrix[9][9];
 
 	printf("Начальная матрица :\n");
 	for (int i = 0; i < 9; i++)
 	{
 		for (int j = 0; j < 8; j++)
 		{
-			Matrix[i][j] = rand() % 100;
+			Matrix[i][j] = rand() % 11;
 			printf("%3d ", Matrix[i][j]);
+			CopyOfMatrix[i][j] = Matrix[i][j];
 		}
-		Matrix[i][8] = rand() % 100;
+		Matrix[i][8] = rand() % 11;
 		printf("%3d\n", Matrix[i][8]);
+		CopyOfMatrix[i][8] = Matrix[i][8];
 	}
 	printf("\n\n");
 
