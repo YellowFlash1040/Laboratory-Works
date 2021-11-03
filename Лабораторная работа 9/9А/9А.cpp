@@ -16,11 +16,11 @@ int main()
 	{
 		for (int j = 0; j < 8; j++)
 		{
-			Matrix[i][j] = rand() % 11;
+			Matrix[i][j] = rand() % 101;
 			printf("%3d ", Matrix[i][j]);
 			CopyOfMatrix[i][j] = Matrix[i][j];
 		}
-		Matrix[i][8] = rand() % 11;
+		Matrix[i][8] = rand() % 101;
 		printf("%3d\n", Matrix[i][8]);
 		CopyOfMatrix[i][8] = Matrix[i][8];
 	}
@@ -53,6 +53,19 @@ int main()
 		printf("%3d\n", Matrix[i][8]);
 	}
 	printf("\n\n");
+
+	printf("Начальная матрица :\n");
+	for (int i = 0; i < 9; i++)
+	{
+		for (int j = 0; j < 8; j++)
+		{
+			Matrix[i][j] = CopyOfMatrix[i][j];
+			printf("%3d ", Matrix[i][j]);
+		}
+		printf("%3d\n", Matrix[i][8]);
+	}
+	printf("\n\n");
+
 
 	int IndexOfMinElementInColumn;
 	int temp;
