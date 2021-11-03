@@ -106,7 +106,7 @@ int main()
 
 
 	//Second variant
-	/*printf("Начальная Матрица :\n\n");
+	printf("Начальная Матрица :\n\n");
 	for (int i = 0; i < 9; i++)
 	{
 		for (int j = 0; j < 8; j++)
@@ -165,5 +165,5 @@ int main()
 		}
 		printf("%3d\n", matrix[i][8]);
 	}
-	printf("\n\n");*/
+	printf("\n\n");
 }
