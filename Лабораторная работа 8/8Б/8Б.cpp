@@ -17,7 +17,7 @@ int main()
 	for (int i = 0; i < lengthOfArray; i++)
 	{
 		Array[i] = i + 1;
-		printf("#%d. %d\n", i, Array[i]);
+		printf("#%d. %d\n", i + 1, Array[i]);
 	}
 	printf("\n");
 
