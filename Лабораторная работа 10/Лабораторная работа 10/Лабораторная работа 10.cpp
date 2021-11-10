@@ -26,7 +26,8 @@ int* TenthTask(int array[], int lengthOfTheArray)
 	{
 		for (int j = 0; j < length; j++)
 		{
-			cout << matrix[i][j] << " ";
+			/*cout << matrix[i][j] << " ";*/
+			printf("%2d ", matrix[i][j]);
 		}
 		cout << endl;
 	}
@@ -57,7 +58,8 @@ int* TenthTask(int array[], int lengthOfTheArray)
 	{
 		for (int j = 0; j < length; j++)
 		{
-			cout << matrix[i][j] << " ";
+			/*cout << matrix[i][j] << " ";*/
+			printf("%2d ", matrix[i][j]);
 		}
 		cout << endl;
 	}
