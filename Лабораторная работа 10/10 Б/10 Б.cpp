@@ -3,7 +3,7 @@
 
 using namespace std;
 
-int FindTheNumberOfPositiveElementsInTheMatrix(int (*matrix)[10000], int countOfColumns, int numberOfTheRow)
+int FindTheNumberOfPositiveElementsInTheMatrix(int (*matrix)[100], int countOfColumns, int numberOfTheRow)
 {
 	int count = 0;
 	for (int i = 0; i < countOfColumns; i++)
@@ -16,7 +16,7 @@ int FindTheNumberOfPositiveElementsInTheMatrix(int (*matrix)[10000], int countOf
 	return count;
 }
 
-void FillMatrix(int (*matrix)[10000], int countOfRows, int countOfColumns)
+void FillMatrix(int (*matrix)[100], int countOfRows, int countOfColumns)
 {
 	srand(time(0));
 	int randomChar;
@@ -30,7 +30,7 @@ void FillMatrix(int (*matrix)[10000], int countOfRows, int countOfColumns)
 	}
 }
 
-void PrintTheMatrix(int (*matrix)[10000], int countOfRows, int countOfColumns)
+void PrintTheMatrix(int (*matrix)[100], int countOfRows, int countOfColumns)
 {
 	for (int i = 0; i < countOfRows; i++)
 	{
@@ -47,12 +47,29 @@ int main()
 	SetConsoleOutputCP(1251);
 
 	int countOfRows, countOfColumns;
-	cout << "Введите количество строк матрицы > ";
-	cin >> countOfRows;
-	cout << "Введите количество колонок матрицы > ";
-	cin >> countOfColumns;
+	do
+	{
+		cout << "Введите количество строк матрицы > ";
+		cin >> countOfRows;
 
-	int matrix[10000][10000];
+		if (countOfRows > 100)
+		{
+			cout << "\nИзвините, количество строк не может превышать 100. Повторите ввод :\n\n";
+		}
+	} while (countOfRows > 100);
+	do
+	{
+		cout << "Введите количество колонок матрицы > ";
+		cin >> countOfColumns;
+
+		if (countOfColumns > 100)
+		{
+			cout << "\nИзвините, количество колонок не может превышать 100. Повторите ввод :\n\n";
+		}
+	} while (countOfColumns > 100);
+	
+
+	int matrix[100][100];
 	
 	FillMatrix(matrix, countOfRows, countOfColumns);
 	cout << "\n";
