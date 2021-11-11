@@ -2,9 +2,8 @@
 
 using namespace std;
 
-int* TenthTask(int array[], int lengthOfTheArray)
+void TenthTask(int array[], int lengthOfTheArray)
 {
-
 	//Create matrix
 	int length = sqrt(lengthOfTheArray);
 	int** matrix = new int* [length];
@@ -66,20 +65,25 @@ int* TenthTask(int array[], int lengthOfTheArray)
 	cout << endl << "=>" << endl;
 	cout << endl;
 
-	//Initializing the resultArray
-	int* resultArray = new int[length * length];
 	//Converting resultMatrix to the resultArray
 	int ind = 0;
 	for (int i = 0; i < length; i++)
 	{
 		for (int j = 0; j < length; j++)
 		{
-			resultArray[ind] = matrix[i][j];
+			array[ind] = matrix[i][j];
 			ind++;
 		}
 	}
 
-	return resultArray;
+	//Freeing memory
+	for (int i = 0; i < length; i++)
+	{
+		delete[]matrix[i];
+		matrix[i] = nullptr;
+	}
+	delete[]matrix;
+	matrix = nullptr;
 }
 
 
@@ -104,13 +108,17 @@ int main()
 	}
 	cout << "\n\n" << "=>" << "\n\n";
 
-	//Call the tenth task function and fill resultArray
-	int* resultArray = TenthTask(array, length);
+	//Call the tenth task function and fill array
+	TenthTask(array, length);
 
 	//Outputting the result array
 	for (int i = 0; i < length; i++)
 	{
-		cout << resultArray[i] << " ";
+		cout << array[i] << " ";
 	}
 	cout << "\n\n";
+
+	//Freeing memory
+	delete[]array;
+	array = nullptr;
 }

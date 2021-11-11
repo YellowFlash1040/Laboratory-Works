@@ -3,7 +3,7 @@
 
 using namespace std;
 
-int FindTheNumberOfPositiveElementsInTheMatrix(int** matrix, int countOfColumns, int numberOfTheRow)
+int FindTheNumberOfPositiveElementsInTheMatrix(int (*matrix)[10000], int countOfColumns, int numberOfTheRow)
 {
 	int count = 0;
 	for (int i = 0; i < countOfColumns; i++)
@@ -16,13 +16,12 @@ int FindTheNumberOfPositiveElementsInTheMatrix(int** matrix, int countOfColumns,
 	return count;
 }
 
-void FillMatrix(int** matrix, int countOfRows, int countOfColumns)
+void FillMatrix(int (*matrix)[10000], int countOfRows, int countOfColumns)
 {
 	srand(time(0));
 	int randomChar;
 	for (int i = 0; i < countOfRows; i++)
 	{
-		matrix[i] = new int[countOfColumns];
 		for (int j = 0; j < countOfColumns; j++)
 		{
 			randomChar = (rand() % 2) % 2 == 1 ? -1 : 1;
@@ -31,7 +30,7 @@ void FillMatrix(int** matrix, int countOfRows, int countOfColumns)
 	}
 }
 
-void PrintTheMatrix(int** matrix, int countOfRows, int countOfColumns)
+void PrintTheMatrix(int (*matrix)[10000], int countOfRows, int countOfColumns)
 {
 	for (int i = 0; i < countOfRows; i++)
 	{
@@ -53,7 +52,8 @@ int main()
 	cout << "Введите количество колонок матрицы > ";
 	cin >> countOfColumns;
 
-	int** matrix = new int* [countOfRows];
+	int matrix[10000][10000];
+	
 	FillMatrix(matrix, countOfRows, countOfColumns);
 	cout << "\n";
 	PrintTheMatrix(matrix, countOfRows, countOfColumns);
