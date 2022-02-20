@@ -1,78 +1,148 @@
-﻿#include <stdio.h>
+﻿#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
 #include <string.h>
 #include <iostream>
-/* Описание структуры, которая представляет монастырь */
-struct mon {
-	char name[15]; /* название */
-	char sc;       /* школа */
-	int cnt;       /* количество монахов */
-	float sq;      /* площадь */
-} mm[10]; /* определение массива монастирей */
-int main(void) {
-	setlocale(LC_ALL, "ru");
-	std::system("chcp 1251");
-	struct mon x; /* рабочая переменная */
-	int n;    /* количество элементов в массиве */
-	int i, j; /* текущие индексы в массиве */
-	int m;    /* индекс минимального элемента */
-	float sqx;/* рабочая переменная */
-	 /* Ввод данных */
-	 /*	Тодайдзи Т 220 368,8
-		Якусидзи С 50 54,7
-		Дайаедзи Д 10 12,2 */
-	for (n = 0; n < 10; n++) {
-		printf("%d. Введите: название, школу, количество, площадь >",
-			n + 1);
-		scanf_s("%s", mm[n].name, sizeof(mm[n].name));
-		if (!strcmp(mm[n].name, "***")) break;
-		scanf_s("%s", &mm[n].sc, sizeof(mm[n].name));
-		scanf_s("%d", &mm[n].cnt);
-		/* Внимание! Мы обходим ошибку в системе программирования */
-		scanf_s("%f", &mm[n].sq); //mm[n].sq = sqx;
+#include <windows.h>
+
+using namespace std;
+
+struct mon
+{
+	char name[15];
+	char type;
+	int square;
+	int urozhaj;
+};
+
+mon mm[10];
+int length;
+
+void PrintTable()
+{
+	printf("------------------------------------------------------\n");
+	printf("|             Сельскохозяйственные культуры          |\n");
+	printf("|----------------------------------------------------|\n");
+	printf("| Наименование  |  Тип  |  Посевная   |  Урожайность |\n");
+	printf("|               |       | площадь(га) |    (ц/га)    |\n");
+	printf("|---------------|-------|-------------|--------------|\n");
+
+	for (int i = 0; i < length; i++)
+	{
+		printf_s("| %-13s | %5c | %11d | %12d |\n", mm[i].name, mm[i].type, mm[i].square, mm[i].urozhaj);
 	}
-	/* Вывод таблицы */
-	printf("---------------------------------------------\n");
-	printf("|Буддийские монастыри Японии периода Нара    |\n");
-	printf("|--------------------------------------------|\n");
-	printf("| Название  | Школа |Количество|   Площадь   |\n");
-	printf("|           |       |  монахов | земель(га)  |\n");
-	printf("|-----------|-------|----------|-------------|\n");
-	/* вывод строк фактических данных */
-	for (i = 0; i < n; i++)
-		printf("| %9s |   %c   | %8d | %-11.1f |\n",
-			mm[i].name, mm[i].sc, mm[i].cnt, mm[i].sq);
-	printf("---------------------------------------------\n");
-	/* сортировка массива */
-	for (i = 0; i < n - 1; i++) {
-		m = i; /* минимальный элемент - первый */
-		for (j = i + 1; j < n; j++)
-			/* если текущий элемент > минимального,
-			   он становится минимальным */
-			if (strcmp(mm[m].name, mm[j].name) > 0) m = j;
-		if (m > i) {
-			/* перестановка первого и минимального элементов */
-			/*strcpy_s(x.name, mm[i].name); x.sc = mm[i].sc;
-			x.cnt = mm[i].cnt; x.sq = mm[i].sq;
-			strcpy_s(mm[i].name, mm[m].name); mm[i].sc = mm[m].sc;
-			mm[i].cnt = mm[m].cnt; mm[i].sq = mm[m].sq;
-			strcpy_s(mm[m].name, x.name); mm[m].sc = x.sc;
-			mm[m].cnt = x.cnt; mm[m].sq = x.sq;*/
-			// Можно это же сделать так:
-			x = mm[i];
-			mm[i] = mm[m];
-			mm[m] = x;
+	printf("------------------------------------------------------\n");
+
+	cout << endl;
+}
+
+void SortArray()
+{
+	mon temp;
+	int indexOfMinElement;
+
+	for (int i = 0; i < length; i++)
+	{
+		indexOfMinElement = i;
+		for (int j = i + 1; j < length; j++)
+		{
+			if (strcmp(mm[j].name, mm[indexOfMinElement].name) <= 0)
+			{
+				indexOfMinElement = j;
+			}
+		}
+		temp = mm[i];
+		mm[i] = mm[indexOfMinElement];
+		mm[indexOfMinElement] = temp;
+	}
+}
+
+void RandomInput()
+{
+	srand(time(0));
+	int size = rand() % 4 + 7;
+	for (int i = 0; i < size; i++)
+	{
+		int nam = rand() % 3;
+		if (nam == 0)
+		{
+			strcpy(mm[i].name, "Чумиза");
+			mm[i].type = 'З';
+		}
+		else if (nam == 1)
+		{
+			strcpy(mm[i].name, "Соя");
+			mm[i].type = 'Б';
+		}
+		else if (nam == 2)
+		{
+			strcpy(mm[i].name, "Рис");
+			mm[i].type = 'З';
+		}
+		
+		mm[i].square = rand() % 25651;
+		mm[i].urozhaj = rand() % 100;
+	}
+	length = size;
+}
+
+void UserInput()
+{
+	int count;
+	for (count = 0, length = 0; count < 10; count++)
+	{
+		printf("%d. Введите: наименование, тип, посевная площадь(га), урожайность(ц/га) >", count + 1);
+
+		scanf_s("%s", mm[count].name, sizeof(mm[count].name));
+		if (strcmp(mm[count].name, "***") == 0)//Проверка на то, хочет ли пользователь продолжать ввод. Если ввод равен "***", значит не хочет, и мы прерываем цикл
+		{
+			break;
+		}
+
+		scanf_s("%s", &mm[count].type, sizeof(mm[count].name));
+		scanf_s("%d", &mm[count].square);
+		scanf_s("%d", &mm[count].urozhaj);
+	}
+	length = count;
+
+	cout << endl;
+}
+
+void ShowMenu()
+{
+	int answer = 0;
+	while (answer != 5)
+	{
+		cout << "Выберите действие:\nВвод с экрана(1)\nВвод случайным образом(2)\nСортировка массива(3)\nПечать таблицы(4)\nВыход из программы(5)\n\n";
+		cout << "Ввод >";
+		cin >> answer;
+		cout << endl;
+
+		if (answer == 1)
+		{
+			UserInput();
+		}
+		else if (answer == 2)
+		{
+			RandomInput();
+		}
+		else if (answer == 3)
+		{
+			SortArray();
+		}
+		else if (answer == 4)
+		{
+			PrintTable();
 		}
 	}
-	/* Вывод таблицы */
-	printf("---------------------------------------------\n");
-	printf("|Буддийские монастыри Японии периода Нара    |\n");
-	printf("|--------------------------------------------|\n");
-	printf("| Название  | Школа |Количество|   Площадь   |\n");
-	printf("|           |       |  монахов | земель(га)  |\n");
-	printf("|-----------|-------|----------|-------------|\n");
-	for (i = 0; i < n; i++)
-		printf("| %9s |   %c   | %8d | %-11.1f |\n",
-			mm[i].name, mm[i].sc, mm[i].cnt, mm[i].sq);
-	printf("---------------------------------------------\n");
+}
+
+int main(void) 
+{
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+	
+	ShowMenu();
+
 	return 0;
 }
