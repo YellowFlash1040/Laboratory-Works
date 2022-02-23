@@ -1,5 +1,5 @@
 ﻿#include "Task1.h"
-//#define PRINT_TYPE
+#define PRINT_TYPE
 
 #include <iostream>
 using namespace std;

@@ -10,10 +10,8 @@ struct mon
 	int square;
 	int urozhaj;
 };
-mon mm[10];
-int length;
 
-void PrintTable()
+void PrintTable(mon mm[10], int length)
 {
 #ifdef DEBUG
 	PrintCurrentTimeAndDate();
@@ -42,7 +40,7 @@ void PrintTable()
 #endif // DEBUG
 }
 
-void SortArray()
+void SortArray(mon mm[10], int length)
 {
 #ifdef DEBUG
 	PrintCurrentTimeAndDate();
@@ -73,7 +71,7 @@ void SortArray()
 #endif // DEBUG
 }
 
-void RandomInput()
+void RandomInput(mon mm[10], int& length)
 {
 #ifdef DEBUG
 	PrintCurrentTimeAndDate();
@@ -112,7 +110,7 @@ void RandomInput()
 #endif // DEBUG
 }
 
-void UserInput()
+void UserInput(mon mm[10], int& length)
 {
 #ifdef DEBUG
 	PrintCurrentTimeAndDate();
@@ -151,6 +149,9 @@ void ShowMenu()
 	PrintCurrentFileNameAndFunctionName("ShowMenu");
 #endif // DEBUG
 
+	mon mm[10];
+	int length = 0;
+
 	int answer = 0;
 	while (answer != 5)
 	{
@@ -161,19 +162,19 @@ void ShowMenu()
 
 		if (answer == 1)
 		{
-			UserInput();
+			UserInput(mm, length);
 		}
 		else if (answer == 2)
 		{
-			RandomInput();
+			RandomInput(mm, length);
 		}
 		else if (answer == 3)
 		{
-			SortArray();
+			SortArray(mm, length);
 		}
 		else if (answer == 4)
 		{
-			PrintTable();
+			PrintTable(mm, length);
 		}
 	}
 
@@ -206,6 +207,9 @@ void ShowMenuWithOnlyUserInput()
 	PrintCurrentFileNameAndFunctionName("ShowMenuWithOnlyUserInput");
 #endif // DEBUG
 
+	mon mm[10];
+	int length = 0;
+
 	int answer = 0;
 	while (answer != 4)
 	{
@@ -216,15 +220,15 @@ void ShowMenuWithOnlyUserInput()
 
 		if (answer == 1)
 		{
-			UserInput();
+			UserInput(mm, length);
 		}
 		else if (answer == 2)
 		{
-			SortArray();
+			SortArray(mm, length);
 		}
 		else if (answer == 3)
 		{
-			PrintTable();
+			PrintTable(mm, length);
 		}
 	}
 
@@ -241,6 +245,9 @@ void ShowMenuWithOnlyRandomInput()
 	PrintCurrentFileNameAndFunctionName("ShowMenuWithOnlyRandomInput");
 #endif // DEBUG
 
+	mon mm[10];
+	int length = 0;
+
 	int answer = 0;
 	while (answer != 4)
 	{
@@ -251,15 +258,15 @@ void ShowMenuWithOnlyRandomInput()
 
 		if (answer == 1)
 		{
-			RandomInput();
+			RandomInput(mm, length);
 		}
 		else if (answer == 2)
 		{
-			SortArray();
+			SortArray(mm, length);
 		}
 		else if (answer == 3)
 		{
-			PrintTable();
+			PrintTable(mm, length);
 		}
 	}
 

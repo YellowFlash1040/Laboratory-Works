@@ -6,10 +6,10 @@ using namespace std;
 struct mon;
 
 void ShowMenu();
-void UserInput();
-void RandomInput();
-void PrintTable();
-void SortArray();
+void UserInput(mon mm[10], int& length);
+void RandomInput(mon mm[10], int& length);
+void PrintTable(mon mm[10], int length);
+void SortArray(mon mm[10], int length);
 void SetRussianLanguage();
 void ShowMenuWithOnlyUserInput();
 void ShowMenuWithOnlyRandomInput();

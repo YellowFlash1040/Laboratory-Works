@@ -15,10 +15,7 @@ struct mon
 	int urozhaj;
 };
 
-mon mm[10];
-int length;
-
-void PrintTable()
+void PrintTable(mon mm[10], int length)
 {
 	printf("------------------------------------------------------\n");
 	printf("|             Сельскохозяйственные культуры          |\n");
@@ -36,7 +33,7 @@ void PrintTable()
 	cout << endl;
 }
 
-void SortArray()
+void SortArray(mon mm[10], int length)
 {
 	mon temp;
 	int indexOfMinElement;
@@ -57,7 +54,7 @@ void SortArray()
 	}
 }
 
-void RandomInput()
+void RandomInput(mon mm[10], int &length)
 {
 	srand(time(0));
 	int size = rand() % 4 + 7;
@@ -86,7 +83,7 @@ void RandomInput()
 	length = size;
 }
 
-void UserInput()
+void UserInput(mon mm[10], int &length)
 {
 	int count;
 	for (count = 0, length = 0; count < 10; count++)
@@ -108,7 +105,7 @@ void UserInput()
 	cout << endl;
 }
 
-void ShowMenu()
+void ShowMenu(mon mm[10], int length)
 {
 	int answer = 0;
 	while (answer != 5)
@@ -120,19 +117,19 @@ void ShowMenu()
 
 		if (answer == 1)
 		{
-			UserInput();
+			UserInput(mm, length);
 		}
 		else if (answer == 2)
 		{
-			RandomInput();
+			RandomInput(mm, length);
 		}
 		else if (answer == 3)
 		{
-			SortArray();
+			SortArray(mm, length);
 		}
 		else if (answer == 4)
 		{
-			PrintTable();
+			PrintTable(mm, length);
 		}
 	}
 }
@@ -141,8 +138,11 @@ int main(void)
 {
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
-	
-	ShowMenu();
+
+	mon mm[10];
+	int length = 0;
+
+	ShowMenu(mm, length);
 
 	return 0;
 }
