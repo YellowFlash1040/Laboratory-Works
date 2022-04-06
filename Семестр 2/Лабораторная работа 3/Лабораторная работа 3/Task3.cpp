@@ -12,7 +12,7 @@ int* FindFirstMaxNumbersInArray(int* array, int lengthOfArray)
     int lengthOfCopyOfArray = lengthOfArray;
     for (int i = 0; i < lengthOfArray; i++)
     {
-        copyOfArray[i] = array[i];
+        *(copyOfArray + i) = *(array + i);
     }
 
     int* resultArray = new int[3];
@@ -21,18 +21,18 @@ int* FindFirstMaxNumbersInArray(int* array, int lengthOfArray)
         int indexOfMaxElement = i;
         for (int j = i + 1; j < lengthOfCopyOfArray; j++)
         {
-            if (copyOfArray[j] > copyOfArray[indexOfMaxElement])
+            if (*(copyOfArray + j) > *(copyOfArray + indexOfMaxElement))
             {
                 indexOfMaxElement = j;
             }
         }
-        int temp = copyOfArray[i];
-        copyOfArray[i] = copyOfArray[indexOfMaxElement];
-        copyOfArray[indexOfMaxElement] = temp;
+        int temp = *(copyOfArray + i);
+        *(copyOfArray + i) = *(copyOfArray + indexOfMaxElement);
+        *(copyOfArray + indexOfMaxElement) = temp;
     }
     for (int i = 0; i < 3; i++)
     {
-        resultArray[i] = copyOfArray[i];
+        *(resultArray + i) = *(copyOfArray + i);
     }
 
     delete[] copyOfArray;
@@ -48,9 +48,12 @@ void StartTask()
     cin >> lengthOfArray;
     int* array = new int[lengthOfArray];
     cout << "¬ведите массив целых чисел через пробел > ";
+
+    int* pointer = array;
+
     for (int i = 0; i < lengthOfArray; i++)
     {
-        cin >> array[i];
+        cin >> *(array + i);
     }
 
 #ifdef WriteUsersInput
@@ -63,10 +66,12 @@ void StartTask()
 
     int* resultArray = FindFirstMaxNumbersInArray(array, lengthOfArray);
 
+    int* resultPointer = resultArray;
+
 #ifdef WriteResultOfProgramWork
     for (int i = 0; i < 3; i++)
     {
-        cout << resultArray[i] << " ";
+        cout << *(resultPointer + i) << " ";
     }
     cout << "\n";
 #endif // WriteResultOfProgramWork

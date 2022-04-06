@@ -12,7 +12,7 @@ int* FindNegativeElements(int* array, int lengthOfArray, int* lengthOfResultArra
     *lengthOfResultArray = 0;
     for (int i = 0; i < lengthOfArray; i++)
     {
-        if (array[i] < 0)
+        if (*(array+i) < 0)
         {
             *lengthOfResultArray += 1;
         }
@@ -21,9 +21,9 @@ int* FindNegativeElements(int* array, int lengthOfArray, int* lengthOfResultArra
     int* resultArray = new int[*lengthOfResultArray];
     for (int i = 0, index = 0; i < lengthOfArray; i++)
     {
-        if (array[i] < 0)
+        if (*(array + i) < 0)
         {
-            resultArray[index] = array[i];
+            *(resultArray + index) = *(array + i);
             index++;
         }
     }
@@ -36,7 +36,7 @@ int* FindPositiveElements(int* array, int lengthOfArray, int* lengthOfResultArra
     *lengthOfResultArray = 0;
     for (int i = 0; i < lengthOfArray; i++)
     {
-        if (array[i] > 0)
+        if (*(array + i) > 0)
         {
             *lengthOfResultArray += 1;
         }
@@ -45,9 +45,9 @@ int* FindPositiveElements(int* array, int lengthOfArray, int* lengthOfResultArra
     int* resultArray = new int[*lengthOfResultArray];
     for (int i = 0, index = 0; i < lengthOfArray; i++)
     {
-        if (array[i] > 0)
+        if (*(array + i) > 0)
         {
-            resultArray[index] = array[i];
+            *(resultArray + index) = *(array + i);
             index++;
         }
     }
@@ -60,7 +60,7 @@ int* FindZeroElements(int* array, int lengthOfArray, int* lengthOfResultArray)
     *lengthOfResultArray = 0;
     for (int i = 0; i < lengthOfArray; i++)
     {
-        if (array[i] == 0)
+        if (*(array + i) == 0)
         {
             *lengthOfResultArray += 1;
         }
@@ -69,9 +69,9 @@ int* FindZeroElements(int* array, int lengthOfArray, int* lengthOfResultArray)
     int* resultArray = new int[*lengthOfResultArray];
     for (int i = 0, index = 0; i < lengthOfArray; i++)
     {
-        if (array[i] == 0)
+        if (*(array + i) == 0)
         {
-            resultArray[index] = array[i];
+            *(resultArray + index) = *(array + i);
             index++;
         }
     }
@@ -90,7 +90,7 @@ void StartTask()
     cout << "¬ведите массив целых чисел через пробел > ";
     for (int i = 0; i < lengthOfArray; i++)
     {
-        cin >> array[i];
+        cin >> *(array + i);
     }
 
 #ifdef WriteUsersInput
@@ -138,21 +138,21 @@ void StartTask()
     int index = 0;
     for (int a = 0; a < lengthOfZeroElementsArray; a++, index++)
     {
-        array[index] = zeroElementsArray[a];
+        *(array + index) = *(zeroElementsArray + a);
     }
     for (int b = 0; b < lengthOfNegativeElementsArray; b++, index++)
     {
-        array[index] = negativeElementsArray[b];
+        *(array + index) = *(negativeElementsArray + b);
     }
     for (int c = 0; c < lengthOfPositiveElementsArray; c++, index++)
     {
-        array[index] = positiveElementsArray[c];
+        *(array + index) = *(positiveElementsArray + c);
     }
 
 #ifdef WriteResultOfProgramWork
     for (int i = 0; i < lengthOfArray; i++)
     {
-        cout << array[i] << " ";
+        cout << *(array + i) << " ";
     }
     cout << "\n";
 #endif // WriteResultOfProgramWork
