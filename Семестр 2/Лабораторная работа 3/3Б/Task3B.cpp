@@ -79,19 +79,48 @@ int* FindZeroElements(int* array, int lengthOfArray, int* lengthOfResultArray)
     return resultArray;
 }
 
+int GenerateRandomSizeOfArray()
+{
+    return rand() % 31;
+}
+
+int GenerateRandomNumberFromMinusNinetyNineToNinetyNine()
+{
+    int symbol = rand() % 2;
+    if (symbol == 0)
+    {
+        return rand() % 100;
+    }
+
+    return -rand() % 100;
+}
+
 void StartTask()
 {
+    srand(time(0));
+
     SetConsoleOutputCP(1251);
 
-    int lengthOfArray;
-    cout << "Введите длину массива > ";
-    cin >> lengthOfArray;
+    int lengthOfArray = GenerateRandomSizeOfArray();
     int* array = new int[lengthOfArray];
-    cout << "Введите массив целых чисел через пробел > ";
+
+    //cout << "Введите длину массива > ";
+    //cin >> lengthOfArray;
+
+    cout << "Длина массива = " << lengthOfArray << "\n";
+    cout << "Массив: ";
+    for (int i = 0; i < lengthOfArray; i++)
+    {
+        *(array + i) = GenerateRandomNumberFromMinusNinetyNineToNinetyNine();
+        cout << *(array + i) << " ";
+    }
+    cout << "\n";
+
+    /*cout << "Введите массив целых чисел через пробел > ";
     for (int i = 0; i < lengthOfArray; i++)
     {
         cin >> *(array + i);
-    }
+    }*/
 
 #ifdef WriteUsersInput
     for (int i = 0; i < lengthOfArray; i++)

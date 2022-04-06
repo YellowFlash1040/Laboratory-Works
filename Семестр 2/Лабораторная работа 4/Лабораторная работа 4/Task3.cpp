@@ -38,52 +38,56 @@ int* FindFirstMaxNumbersInArray(int* array, int lengthOfArray)
 
     return resultArray;
 }
-int* GetArrayFromUser(int* lengthOfArray)
+
+int GenerateRandomSizeOfArray()
 {
-    cout << "Введите длину массива > ";
-    cin >> *lengthOfArray;
-    int* array = new int[*lengthOfArray];
-    cout << "Введите массив целых чисел через пробел > ";
-    for (int i = 0; i < *lengthOfArray; i++)
+    return rand() % 31;
+}
+
+int GenerateRandomNumberFromMinusNinetyNineToNinetyNine()
+{
+    int symbol = rand() % 2;
+    if (symbol == 0)
     {
-        cin >> *(array + i);
+        return rand() % 100;
+    }
+
+    return -rand() % 100;
+}
+
+int* FillArray(int lengthOfArray)
+{
+    int* array = new int[lengthOfArray];
+    for (int i = 0; i < lengthOfArray; i++)
+    {
+        *(array + i) = GenerateRandomNumberFromMinusNinetyNineToNinetyNine();
     }
 
     return array;
 }
+
 void StartTask()
 {
+    srand(time(0));
+
     SetConsoleOutputCP(1251);
 
-    int lengthOfArray;
-    cout << "Введите длину массива > ";
-    cin >> lengthOfArray;
-    int* array = new int[lengthOfArray];
-    cout << "Введите массив целых чисел через пробел > ";
-
-    int* pointer = array;
-
+    int lengthOfArray = GenerateRandomSizeOfArray();
+    cout << "Длина массива = " << lengthOfArray << "\n";
+    cout << "Массив: ";
+    int* array = FillArray(lengthOfArray);
     for (int i = 0; i < lengthOfArray; i++)
     {
-        cin >> *(array + i);
-    }
-
-#ifdef WriteUsersInput
-    for (int i = 0; i < lengthOfArray; i++)
-    {
-        cout << array[i] << " ";
+        cout << *(array + i) << " ";
     }
     cout << "\n";
-#endif // WriteUsersInput
 
     int* resultArray = FindFirstMaxNumbersInArray(array, lengthOfArray);
-
-    int* resultPointer = resultArray;
 
 #ifdef WriteResultOfProgramWork
     for (int i = 0; i < 3; i++)
     {
-        cout << *(resultPointer + i) << " ";
+        cout << *(resultArray + i) << " ";
     }
     cout << "\n";
 #endif // WriteResultOfProgramWork
