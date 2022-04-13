@@ -4,7 +4,7 @@
 
 using namespace std;
 
-//#define Array
+#define Array
 
 void SetRussianLanguage()
 {
@@ -125,10 +125,13 @@ void StartTask()
 	for (int i = 0; i < *(lengthAndWidthOfMatrix + 0); i++)
 	{
 		delete[] * (matrix + i);
+		*(matrix + i) = nullptr;
 	}
-
+	
 	delete[] matrix;
+	matrix = nullptr;
 #else
 	delete[] matrix;
+	matrix = nullptr;
 #endif // Array
 }
