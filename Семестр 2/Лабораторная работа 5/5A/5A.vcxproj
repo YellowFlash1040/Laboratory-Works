@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{7a9b3051-40bd-4997-8258-a2534e26a35e}</ProjectGuid>
-    <RootNamespace>My3А</RootNamespace>
+    <ProjectGuid>{63f1c5ec-4746-42c9-9c66-dc6f52c33a61}</ProjectGuid>
+    <RootNamespace>My5A</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -139,11 +139,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="3А.cpp" />
-    <ClCompile Include="Task3A.cpp" />
+    <ClCompile Include="5A.cpp" />
+    <ClCompile Include="Task5A.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Task3A.h" />
+    <ClInclude Include="Task5A.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
