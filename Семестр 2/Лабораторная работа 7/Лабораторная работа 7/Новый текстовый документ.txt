@@ -1,0 +1,44 @@
+ifstream StreamReader("data.txt");
+	string content;
+	string parts[4];
+	int ind = 0;
+	while (getline(StreamReader, content))
+	{
+		for (int i = 0, index = 0; i < content.length(); i++)
+		{
+			if (content[i] == ' ')
+			{
+				index++;
+			}
+			parts[index] = parts[index] + content[i];
+		}
+		for (size_t i = 0; i < parts[0].length(); i++)
+		{
+			mm[ind].name[i] = parts[0][i];
+		}
+		for (size_t i = 0; i < parts[1].length(); i++)
+		{
+			mm[ind].type = parts[1][i];
+		}
+		char* Square = new char[parts[2].length()];
+		for (size_t i = 0; i < parts[2].length(); i++)
+		{
+			Square[i] = parts[2][i];
+		}
+		mm[ind].square = atoi(Square);
+		char* Urozhaj = new char[parts[3].length()];
+		for (size_t i = 0; i < length; i++)
+		{
+			Urozhaj[i] = parts[3][i];
+		}
+		mm[ind].urozhaj = atoi(Urozhaj);
+
+		ind++;
+	}
+
+	ofstream StreamWriter("data.txt", ios::app);
+	for (int i = 0; i < length; i++)
+	{
+		mon m = mm[i];
+		StreamWriter << m.name << " " << m.type << " " << m.square << " " << m.urozhaj << "\n";
+	}
