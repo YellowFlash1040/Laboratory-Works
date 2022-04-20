@@ -241,7 +241,7 @@ void ReadAllLinesFromFileAndWriteThemInToConsole()
 
 void CompleteItemSelectedByUser(char answer)
 {
-	int length = 1;
+	int length = 5;
 	mon m;
 	if (answer == '1')
 	{

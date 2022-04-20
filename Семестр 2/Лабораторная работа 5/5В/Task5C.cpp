@@ -95,24 +95,9 @@ void CountingSort(int array[], int lengthOfArray)
     }
 }
 
-void SortArray(int* array, int length, int (*ChoosesortMethod)())
+void SortArray(int* array, int length, void (*SortMethod)(int* array, int length))
 {
-    int numberOfMethod = ChoosesortMethod();
-    if (numberOfMethod == 1)
-    {
-        cout << "Choosed method: Bubble sort\n";
-        BubbleSort(array, length);
-    }
-    else if (numberOfMethod == 2)
-    {
-        cout << "Choosed method: Pancake sort\n";
-        PancakeSort(array, length);
-    }
-    else if (numberOfMethod == 3)
-    {
-        cout << "Choosed method: Counting sort\n";
-        CountingSort(array, length);
-    }
+    SortMethod(array, length);
 }
 
 int ChooseMethod()
@@ -134,7 +119,26 @@ void StartTask()
     }
     cout << "\n";
 
-    SortArray(array, length, ChooseMethod);
+    void (*SortMethod)(int* array, int length);
+
+    int numberOfMethod = ChooseMethod();
+    if (numberOfMethod == 1)
+    {
+        cout << "Choosed method: Bubble sort\n";
+        SortMethod = BubbleSort;
+    }
+    else if (numberOfMethod == 2)
+    {
+        cout << "Choosed method: Pancake sort\n";
+        SortMethod = PancakeSort;
+    }
+    else //if (numberOfMethod == 3)
+    {
+        cout << "Choosed method: Counting sort\n";
+        SortMethod = CountingSort;
+    }
+    
+    SortArray(array, length, SortMethod);
 
     cout << "Sorted array: ";
     for (int i = 0; i < length; i++)
