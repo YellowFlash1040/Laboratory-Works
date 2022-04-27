@@ -70,6 +70,9 @@ int ReadOneNumberFromFileWithNumber(char filePath[], int numberOfNumber)
 	delete[] Num;
 	Num = nullptr;
 
+	fclose(dataFile);
+	dataFile = nullptr;
+
 	return num;
 }
 
@@ -85,6 +88,67 @@ int FindIndexOfMinimalNumber(int* array, int length)
 	}
 
 	return indexOfMinimalNumber;
+}
+
+int FindSumOfElementsInArray(int* array, int length)
+{
+	int sum = 0;
+	for (int i = 0; i < length; i++)
+	{
+		sum += array[i];
+	}
+
+	return sum;
+}
+
+FILE* CreateFileForData(char filePath[])
+{
+	FILE* dataFile;
+	dataFile = fopen(filePath, "w");
+	fclose(dataFile);
+
+	return dataFile;
+}
+
+void WriteNumberInfileAtPosition(char* filePath, int number, int position)
+{
+	char* newFilePath = new char[256];
+	ClearCharArray(newFilePath, 256);
+
+	int index = 0;
+	while (filePath[index] != '.')
+	{
+		newFilePath[index] = filePath[index];
+		index++;
+	}
+
+	newFilePath[index] = '1';
+	newFilePath[index + 1] = '.';
+	newFilePath[index + 2] = 't';
+	newFilePath[index + 3] = 'x';
+	newFilePath[index + 4] = 't';
+	index += 4;
+
+	CreateFileForData(newFilePath);
+
+	for (int i = 0; i < 20; i++)
+	{
+		if (i + 1 == position)
+		{
+			WriteNumberToFile(number, newFilePath);
+		}
+		else
+		{
+			int num = ReadOneNumberFromFileWithNumber(filePath, i + 1);
+			WriteNumberToFile(num, newFilePath);
+		}
+	}
+
+	remove(filePath);
+	rename(newFilePath, filePath);
+
+	delete[] newFilePath;
+	newFilePath = nullptr;
 }
 
 void StartTask()
@@ -115,16 +179,23 @@ void StartTask()
 	cout << "Fifth number = " << numbers[1] << "\n";
 	cout << "Nineth number = " << numbers[2] << "\n";
 
+	int sum = FindSumOfElementsInArray(numbers, 3);
 	int indexOfMinimalElement = FindIndexOfMinimalNumber(numbers, 3);
-	cout << "Minimal = " << indexOfMinimalElement;
+	cout << "Sum = " << sum << '\n';
+	cout << "Minimal = " << numbers[indexOfMinimalElement] << '\n';
 
-	if (indexOfMinimalElement == 1)
+	if (indexOfMinimalElement == 0)
 	{
-
+		indexOfMinimalElement = 2;
 	}
-	else if (indexOfMinimalElement == 4)
+	else if (indexOfMinimalElement == 1)
 	{
-
+		indexOfMinimalElement = 5;
 	}
-	else if(indexOfMi)
+	else if (indexOfMinimalElement == 2)
+	{
+		indexOfMinimalElement = 9;
+	}
+
+	WriteNumberInfileAtPosition(filePath, 999, indexOfMinimalElement);
 }
