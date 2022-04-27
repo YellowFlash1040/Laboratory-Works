@@ -12,7 +12,7 @@ int GetRandomNumber()
 	return rand() % 21 - 10;
 }
 
-void WriteNumberToFile(int number, char filePath[])
+void WriteNumberToFile(int number, char* filePath)
 {
 	FILE* dataFile = fopen(filePath, "a+");
 
@@ -38,7 +38,7 @@ void ClearCharArray(char* word, int length)
 	}
 }
 
-int ReadOneNumberFromFileWithNumber(char filePath[], int numberOfNumber)
+int ReadOneNumberFromFileWithNumber(char* filePath, int numberOfNumber)
 {
 	FILE* dataFile = fopen(filePath, "r");
 
@@ -101,7 +101,7 @@ int FindSumOfElementsInArray(int* array, int length)
 	return sum;
 }
 
-FILE* CreateFileForData(char filePath[])
+FILE* CreateFileForData(char* filePath)
 {
 	FILE* dataFile;
 	dataFile = fopen(filePath, "w");
