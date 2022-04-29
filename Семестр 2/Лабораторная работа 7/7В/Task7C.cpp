@@ -7,87 +7,38 @@
 
 using namespace std;
 
-int GetRandomNumber()
+int GetRandomNumber(int min, int max)
 {
-	return rand() % 21 - 10;
+	if (min > max)
+	{
+		int temp = max;
+		max = min;
+		min = temp;
+	}
+
+	return rand() % (max - min + 1) + min;
 }
 
-void WriteNumberToFile(int number, char* filePath)
+void WriteOneElementInTheEndOfFile(int element, char* filePath)
 {
-	FILE* dataFile = fopen(filePath, "a+");
-
-	char* number_String = new char[15];
-	itoa(number, number_String, 10);
-	int countOfSymbols = 0;
-	while (number_String[countOfSymbols] != '\0')
-	{
-		countOfSymbols++;
-	}
-	fwrite(number_String, 1, countOfSymbols, dataFile);
-	fwrite(" ", 1, 1, dataFile);
-
+	FILE* dataFile = fopen(filePath, "ab");
+	fwrite(&element, sizeof(element), 1, dataFile);
 	fclose(dataFile);
 	dataFile = nullptr;
 }
 
-void ClearCharArray(char* word, int length)
+int ReadNumberFromFileWithNumber(char* filePath, int numberOfNumber)
 {
-	for (int i = 0; i < length; i++)
-	{
-		word[i] = NULL;
-	}
-}
+	numberOfNumber--;
 
-int ReadOneNumberFromFileWithNumber(char* filePath, int numberOfNumber)
-{
-	FILE* dataFile = fopen(filePath, "r");
-
-	char* number = new char[15];
-	ClearCharArray(number, 15);
-	int index;
-	for (int i = 0; i < numberOfNumber; i++)
-	{
-		char* bufer = new char[4];
-		ClearCharArray(bufer, 4);
-		fread(bufer, 1, 1, dataFile);
-		index = 0;
-		while (bufer[0] != ' ')
-		{
-			number[index] = bufer[0];
-			index++;
-			fread(bufer, 1, 1, dataFile);
-		}
-	}
-	char* Num = new char[index];
-	for (int i = 0; i < index; i++)
-	{
-		Num[i] = number[i];
-	}
-	int num = atoi(Num);
-
-	delete[] number;
-	number = nullptr;
-	delete[] Num;
-	Num = nullptr;
-
+	FILE* dataFile = fopen(filePath, "rb");
+	fseek(dataFile, numberOfNumber * sizeof(int), SEEK_SET);
+	int number;
+	fread(&number, sizeof(int), 1, dataFile);
 	fclose(dataFile);
 	dataFile = nullptr;
 
-	return num;
-}
-
-int FindIndexOfMinimalNumber(int* array, int length)
-{
-	int indexOfMinimalNumber = 0;
-	for (int i = 1; i < length; i++)
-	{
-		if (array[i] < array[indexOfMinimalNumber])
-		{
-			indexOfMinimalNumber = i;
-		}
-	}
-
-	return indexOfMinimalNumber;
+	return number;
 }
 
 int FindSumOfElementsInArray(int* array, int length)
@@ -101,101 +52,92 @@ int FindSumOfElementsInArray(int* array, int length)
 	return sum;
 }
 
-FILE* CreateFileForData(char* filePath)
+int FindIndexOfMinimalElementInArray(int* array, int length)
 {
-	FILE* dataFile;
-	dataFile = fopen(filePath, "w");
-	fclose(dataFile);
+	int indexOfMinElement = 0;
+	for (int i = 1; i < length; i++)
+	{
+		if (array[i] < array[indexOfMinElement])
+		{
+			indexOfMinElement = i;
+		}
+	}
 
-	return dataFile;
+	return indexOfMinElement;
 }
 
-void WriteNumberInfileAtPosition(char* filePath, int number, int position)
+void WriteNumberInFileAtPosition(char* filePath, int number, int position)
 {
-	char* newFilePath = new char[256];
-	ClearCharArray(newFilePath, 256);
-
-	int index = 0;
-	while (filePath[index] != '.')
-	{
-		newFilePath[index] = filePath[index];
-		index++;
-	}
-
-	newFilePath[index] = '1';
-	newFilePath[index + 1] = '.';
-	newFilePath[index + 2] = 't';
-	newFilePath[index + 3] = 'x';
-	newFilePath[index + 4] = 't';
-	index += 4;
-
-	CreateFileForData(newFilePath);
-
-	for (int i = 0; i < 20; i++)
-	{
-		if (i + 1 == position)
-		{
-			WriteNumberToFile(number, newFilePath);
-		}
-		else
-		{
-			int num = ReadOneNumberFromFileWithNumber(filePath, i + 1);
-			WriteNumberToFile(num, newFilePath);
-		}
-	}
-
-	remove(filePath);
-	rename(newFilePath, filePath);
-
-	delete[] newFilePath;
-	newFilePath = nullptr;
+	position--;
+	FILE* dataFile = fopen(filePath, "rb+");
+	fseek(dataFile, position * sizeof(number), SEEK_SET);
+	fwrite(&number, sizeof(number), 1, dataFile);
+	fclose(dataFile);
+	dataFile = nullptr;
 }
 
 void StartTask()
 {
 	srand(time(0));
 
-	int number;
+	char* filePath = new char[] {"f1"};
+
 	int length = 20;
-	char* filePath = new char[] {"f1.txt"};
+	int* mas1 = new int[length];
 
-	FILE* dataFile = fopen(filePath, "w");
-	fclose(dataFile);
-	dataFile = nullptr;
-
+	cout << "Array: ";
 	for (int i = 0; i < length; i++)
 	{
-		number = GetRandomNumber();
-		WriteNumberToFile(number, filePath);
+		mas1[i] = GetRandomNumber(-10, 10);
+		WriteOneElementInTheEndOfFile(mas1[i], filePath);
+		cout << mas1[i] << " ";
 	}
+	cout << "\n\n";
 
-	int numbers[3];
+	int* numbers = new int[3];
+	numbers[0] = ReadNumberFromFileWithNumber(filePath, 2);
+	numbers[1] = ReadNumberFromFileWithNumber(filePath, 5);
+	numbers[2] = ReadNumberFromFileWithNumber(filePath, 9);
 
-	numbers[0] = ReadOneNumberFromFileWithNumber(filePath, 2);
-	numbers[1] = ReadOneNumberFromFileWithNumber(filePath, 5);
-	numbers[2] = ReadOneNumberFromFileWithNumber(filePath, 9);
-
-	cout << "Second number = " << numbers[0] << "\n";
-	cout << "Fifth number = " << numbers[1] << "\n";
-	cout << "Nineth number = " << numbers[2] << "\n";
+	cout << "Second number = " << numbers[0] << '\n';
+	cout << "Fifth number = " << numbers[1] << '\n';
+	cout << "Nineth number = " << numbers[2] << '\n';
 
 	int sum = FindSumOfElementsInArray(numbers, 3);
-	int indexOfMinimalElement = FindIndexOfMinimalNumber(numbers, 3);
 	cout << "Sum = " << sum << '\n';
-	cout << "Minimal = " << numbers[indexOfMinimalElement] << '\n';
+	int index = FindIndexOfMinimalElementInArray(numbers, 3);
+	cout << "Minimal number = " << numbers[index] << '\n';
+	if (index == 0)
+	{
+		index = 2;
+	}
+	else if (index == 1)
+	{
+		index = 5;
+	}
+	else if (index == 2)
+	{
+		index = 9;
+	}
 
-	if (indexOfMinimalElement == 0)
-	{
-		indexOfMinimalElement = 2;
-	}
-	else if (indexOfMinimalElement == 1)
-	{
-		indexOfMinimalElement = 5;
-	}
-	else if (indexOfMinimalElement == 2)
-	{
-		indexOfMinimalElement = 9;
-	}
+	WriteNumberInFileAtPosition(filePath, 999, index);
 
-	WriteNumberInfileAtPosition(filePath, 999, indexOfMinimalElement);
+	cout << "\n";
+	cout << "New Array: ";
+	for (int i = 0; i < length; i++)
+	{
+		cout << ReadNumberFromFileWithNumber(filePath, i + 1) << " ";
+	}
+	cout << "\n\n";
+
+
+	delete[] numbers;
+	numbers = nullptr;
+	delete[] mas1;
+	mas1 = nullptr;
+
+	remove(filePath);
+
+	delete[] filePath;
+	filePath = nullptr;
 }
