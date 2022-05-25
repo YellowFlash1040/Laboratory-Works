@@ -1,0 +1,96 @@
+#include "Task8.h"
+#include <windows.h>
+
+void StartTask()
+{
+	SetConsoleOutputCP(1251);
+
+	List* mons = new List();
+	delete mons;
+	mons = nullptr;
+}
+
+#pragma once
+
+#include "Task2.h"
+#include <iostream>
+
+using namespace std;
+
+void StartTask();
+
+struct List
+{
+private:mon* collection;
+private:int lengthOfCollection;
+private:int standartLength = 100;
+
+public:int Count;
+
+public: List()
+{
+	lengthOfCollection = standartLength;
+	collection = new mon[lengthOfCollection];
+
+	Count = 0;
+}
+
+public:	void Add(mon m)
+{
+	Insert(m, Count);
+}
+
+private: void InsertElementInArrayAtPosition(mon element, int position, mon* array, int lengthOfArray)
+{
+	for (int i = position - 1; i < lengthOfArray - 1; i++)
+	{
+		array[i + 1] = array[i];
+	}
+	array[position] = element;
+}
+
+public: void Insert(mon m, int position)
+{
+	if (Count < lengthOfCollection)
+	{
+		InsertElementInArrayAtPosition(m, position, collection, lengthOfCollection);
+	}
+	else
+	{
+		int lengthOfCopyOfCollection = lengthOfCollection;
+		mon* copyOfCollection = new mon[lengthOfCopyOfCollection];
+		for (int i = 0; i < lengthOfCollection; i++)
+		{
+			copyOfCollection[i] = collection[i];
+		}
+
+		lengthOfCollection = lengthOfCopyOfCollection + standartLength;
+		collection = new mon[lengthOfCollection];
+		for (int i = 0; i < lengthOfCopyOfCollection; i++)
+		{
+			collection[i] = copyOfCollection[i];
+		}
+		delete[] copyOfCollection;
+		copyOfCollection = nullptr;
+
+		InsertElementInArrayAtPosition(m, position, collection, lengthOfCollection);
+	}
+
+	Count++;
+}
+
+public:	void WriteAllElementsInConsole()
+{
+	for (int i = 0; i < Count; i++)
+	{
+		cout << collection[i].name << " " << collection[i].type << " " << collection[i].square << " "
+			<< collection[i].urozhaj << '\n';
+	}
+}
+
+public: ~List()
+{
+	delete[] collection;
+	collection = nullptr;
+}
+};
